@@ -1,7 +1,7 @@
 #ifndef BUSHI_H
 	#define BUSHI_H
-
-	#define         MAKEBUSHI(type, abs, ord, joueur)   ((Bushi){type, abs, ord, joueur})               
+	#include "include.h"
+	#define         MAKEBUSHI(type, abs, ord, joueur, alive)   ((Bushi){type, abs, ord, joueur, alive})               
 
 typedef struct Bushi Bushi;
 struct Bushi {
@@ -22,6 +22,6 @@ struct Bushi {
 
 void affiche_bushi(Bushi b);
 
-void charger_partie(const char* fileName, Bushi pions[M]);
+void charger_partie(const char* fileName, Bushi pions[N]);
 
 #endif

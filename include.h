@@ -1,4 +1,3 @@
-#include <stdin.h>
+#include <stdlib.h>
 #include <stdio.h>
-#define TAILLEPLATEAU 11
-#define NBBUSHI 24
+#define N 10

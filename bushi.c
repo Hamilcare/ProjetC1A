@@ -18,8 +18,8 @@ void affiche_bushi(Bushi b){
 
 
 /* Charge une partie à partir des données fournies dans le 
- * fichier fileName*/
-void charger_partie(const char* fileName, Bushi pions[M]){
+ * fichier fileName
+void charger_partie(const char* fileName, Bushi pions[N]){
 	FILE* fichier = NULL;
 	int tmp[5]; //Ce tableau contient la valeur des différents attributs d'un bushi lu depuis pions.txt
 				//Dans l'ordre joueur, type, abscisse, ordonnee, alive
@@ -30,7 +30,7 @@ void charger_partie(const char* fileName, Bushi pions[M]){
 		while(fscanf(fichier,"%d %d %d %d", &tmp[0], &tmp[1], &tmp[2], &tmp[3])!=EOF){
 		
 			Bushi test;
-			test=WALLAH(tmp[0],tmp[2], [tmp[3]], tmp[1]);//crée un bushi à l'aide de la macro WALLAH
+			test=MAKEBUSHI(tmp[0],tmp[2], [tmp[3]], tmp[1]);//crée un bushi à l'aide de la macro WALLAH
 			printf("====Bushi===\n");
 			affiche_bushi(test);
 		
@@ -47,5 +47,5 @@ void charger_partie(const char* fileName, Bushi pions[M]){
 	}
 	
 }
-
+*/
 
