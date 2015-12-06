@@ -1,11 +1,13 @@
 #ifndef PLATEAU_H
 	#define PLATEAU_H
-	#define "include.h"
+	#include "include.h"
+	#include "bushi.h"
 
-typedef struct Plateau Plateau{
+typedef struct Plateau Plateau;
 struct Plateau{
-	Bushi (*pions)[N];
+	Bushi pions [N][N];
 };
 
-
+void init_plateau(Plateau platal);
+void affiche_plateau(Plateau platal);
 #endif

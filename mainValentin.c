@@ -1,12 +1,13 @@
 #include "include.h"
 #include "plateau.h"
 #include "bushi.h"
- 
+
+Plateau platal;
+
 int main (void){
-       
-        Bushi pions[M];
-       
-       
+        affiche_plateau(platal);
+	init_plateau(platal);       
+//	affiche_plateau(platal);       
        
        
        
