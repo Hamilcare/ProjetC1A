@@ -2,7 +2,6 @@
 	#define BUSHI_H
 	#include "include.h"
 	#define         MAKEBUSHI(type, abs, ord, joueur, alive)   ((Bushi){type, abs, ord, joueur, alive})               
-
 typedef struct Bushi Bushi;
 struct Bushi {
 	int type; // 1=Singe, 2=Lion, 3= Dragon	

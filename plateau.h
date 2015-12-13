@@ -8,6 +8,8 @@ struct Plateau{
 	Bushi pions [N][N];
 };
 
-void init_plateau(Plateau platal);
-void affiche_plateau(Plateau platal);
+extern Plateau plateau;
+
+void init_plateau(Plateau *plateau);
+void affiche_plateau(Plateau *plateau);
 #endif
