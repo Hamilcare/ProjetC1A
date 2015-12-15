@@ -4,7 +4,11 @@
 // Efface l'écran et replace le curseur en haut à gauche
 #define clrscr() printf("\033[H\033[2J")
 // Sélection de couleurs
-#define couleur(param) printf("\033[%sm",param)
+#define setcolor(param) printf("\033[%sm",param)
+
+#define WHITE	"0"
+#define RED	"31"
+#define BLUE	"34"
 /* param devant être un const char *, vide (identique à "0") ou formé
 d'une où plusieurs valeurs séparées par des ; parmi
 0 réinitialisation 1 haute intensité (des caractères)

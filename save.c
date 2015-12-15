@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <signal.h>
  
-#define         SAVE_FILE       "save.starfoullah"
+#define         SAVE_FILE       "save.shingshang"
 
 Plateau plateau;
  
@@ -29,7 +29,7 @@ void            load( void )
         }
         fread(&plateau , sizeof(plateau) , 1 , file);
         fclose(file);
-        rmdir(SAVE_FILE);
+        unlink(SAVE_FILE);
 }
  
 void            handle_signal(int signal)

@@ -11,5 +11,7 @@ struct Plateau{
 extern Plateau plateau;
 
 void init_plateau(Plateau *plateau);
+void init_plateaubis(Plateau *plateau);
 void affiche_plateau(Plateau *plateau);
+void nouvelle_partie(Plateau *plateau);
 #endif

@@ -20,10 +20,12 @@ int main (void){
 	}
 	else
 	{
-		init_plateau(&plateau);
+		init_plateaubis(&plateau);
 	}
+//	fclose(fichier);	
 	affiche_plateau(&plateau);  
        	getchar();
+	nouvelle_partie(&plateau);
 	affiche_plateau(&plateau);       
        
        
