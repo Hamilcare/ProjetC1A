@@ -22,11 +22,12 @@ int main (void){
 	{
 		init_plateaubis(&plateau);
 	}
-//	fclose(fichier);	
+	//fclose(fichier);	
 	affiche_plateau(&plateau);  
        	getchar();
 	nouvelle_partie(&plateau);
-	affiche_plateau(&plateau);       
+	affiche_plateau(&plateau);  
+	bushi_joueur(&plateau, 1);     
        
        
        

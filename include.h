@@ -3,4 +3,6 @@
 	#include <stdlib.h>
 	#include <stdio.h>
 	#define N 10
+	#define NBMAXBUSHIS 12
+	#define DEPLACEMENTSMAX 16
 #endif

@@ -52,10 +52,10 @@ void affiche_plateau(Plateau *plateau)
 	int i,j,k;
 	char *color;
 	
-	puts("      -------------------------------------------------      ");
+	puts("      ----------------------------------------      ");
 	for (i = 0; i < N; i++)
 	{
-		for (k = 0; k < 3; k++)
+		for (k = 0; k < 2; k++)
 		{ 
 			for(j = 0; j < N; j++)
 			{
@@ -66,12 +66,12 @@ void affiche_plateau(Plateau *plateau)
 				setcolor(color);	
 				switch(plateau->pions[i][j].type)
 				{
-					case -2 : printf(" PPP "); break;
-					case -1 : printf("      "); break;
-					case 0 : printf("     "); break;
-					case 1 : printf(" SSS "); break;
-					case 2 : printf(" LLL "); break;
-					case 3 : printf(" DDD "); break;
+					case -2 : printf(" PP "); break;
+					case -1 : printf("     "); break;
+					case 0 : printf("    "); break;
+					case 1 : printf(" SS "); break;
+					case 2 : printf(" LL "); break;
+					case 3 : printf(" DD "); break;
 					default : break;
 				}
 				setcolor(WHITE);
@@ -81,9 +81,9 @@ void affiche_plateau(Plateau *plateau)
 			printf("\n");
 		}
 		if (i >= 3 && i <= 5)
-			puts("-------------------------------------------------------------");
+			puts("----------------------------------------------------");
 		else
-			puts("      -------------------------------------------------      ");		
+			puts("      ----------------------------------------      ");		
 	}
 }
 
@@ -117,3 +117,108 @@ void nouvelle_partie(Plateau *plateau){
 	}
 	
 }
+
+
+
+//Renvoie la liste des bushis encore en jeu du joueur passé en paramètre
+void bushi_joueur(Plateau *plateau, int joueur){
+	int i,j;
+	int k=0;
+	Bushi* tab[NBMAXBUSHIS];
+	
+	for(i=0; i<N; i++){
+		for(j=0; j<N; j++){
+			if(plateau->pions[i][j].joueur==joueur && plateau->pions[i][j].type != -2){
+				tab[k]=&(plateau->pions[i][j]);
+				k++;
+			}
+		}
+	}
+	
+	
+	
+	for(i=0;i<k;i++){
+		printf("%d. ",i);
+		affiche_bushi_coord(tab[i]);
+		
+	}
+	
+	
+	
+}
+
+
+void deplacement_bushi(Plateau *plateau,Bushi *bushi){
+	
+	Bushi* moove[DEPLACEMENTSMAX];
+	switch(bushi->type){
+		case 1 : deplacement_singe(plateau, bushi, moove);break;
+		default : break;
+	}
+}
+
+void deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi* moove[]){
+	
+	int i,j;
+	int k=0;//index du tableau moove
+
+	 
+	for(i=1; i>=-1; i--){
+		
+		for(j=1; j>=-1; j--){
+			
+			int tempoAbs=bushi->abs+j;
+			int tempoOrd=bushi->ord+i;
+			
+			//on verifie que la case que l'on veut tester est dans le plateau et est valide
+			if(est_valide(plateau, *bushi, i,j)==1){
+				
+				
+				//on verifie que la case est vide
+				if(plateau->pions[tempoOrd][tempoAbs].type==0){
+					moove[k]=&(plateau->pions[tempoOrd][tempoAbs]);
+					k++;
+					
+						
+					if(est_valide(plateau, *bushi, 2*i, 2*j)==1){
+						tempoAbs+=tempoAbs+j;
+						tempoOrd=tempoOrd+i;
+					
+						//Si la case située à 2 de distance est libre on l'ajoute au déplacment possible
+						if(plateau->pions[tempoOrd][tempoAbs].type==0){
+						moove[k]=&(plateau->pions[tempoOrd][tempoAbs]);
+						k++;
+						}
+					}
+
+				}
+				
+			}
+		}
+	}
+					
+	
+}
+
+
+int est_valide(Plateau *plateau,Bushi bushi, int x, int y){
+	int tempoAbs=bushi.abs+y;
+	int tempoOrd=bushi.ord+x;
+	int resul=0;
+	if(tempoAbs < N && tempoAbs >=0 && tempoOrd < N && tempoOrd >= 0){
+		if(plateau->pions[tempoOrd][tempoAbs].type=-1 && plateau->pions[tempoOrd][tempoAbs].type==-2){
+			resul=0;
+		}
+		else{
+			resul=1;
+		}
+	}
+	
+	printf ("la validité de la case %d %d vaut %d",tempoAbs,tempoOrd,resul);
+	return resul;
+}
+
+
+
+		
+	
