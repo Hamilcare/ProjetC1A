@@ -15,7 +15,7 @@ void affiche_bushi(Bushi b){
 }
 
 void affiche_bushi_coord(Bushi *b){
-	printf("(%d,%d)\n",b->abs,b->ord);
+	printf("Type %d : (%d,%d)\n",b->type,b->abs,b->ord);
 }
 
 

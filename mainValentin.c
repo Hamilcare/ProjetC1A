@@ -26,9 +26,13 @@ int main (void){
 	affiche_plateau(&plateau);  
        	getchar();
 	nouvelle_partie(&plateau);
+	
+	
 	affiche_plateau(&plateau);  
-	bushi_joueur(&plateau, 1);     
-       
+	Bushi* b = bushi_joueur(&plateau, 1);
+	affiche_bis(&plateau);
+	deplacement_bushi(&plateau,b);   
+    affiche_bis(&plateau);
        
        
        

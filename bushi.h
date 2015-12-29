@@ -2,7 +2,7 @@
 	#define BUSHI_H
 	#include "include.h"
 	#define         MAKEBUSHI(type, abs, ord, joueur, alive) ((Bushi){type, abs, ord, joueur, alive})               
-	#define		EMPTY					 MAKEBUSHI(0, 0, 0, 0, 0)
+	#define		EMPTY(i,j)					 MAKEBUSHI(0, j, i, 0, 0)
 	#define 	BLOCKED					 MAKEBUSHI(-1, 0, 0, 0, 0)
 
 typedef struct Bushi Bushi;

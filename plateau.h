@@ -16,8 +16,13 @@ void affiche_plateau(Plateau *plateau);
 void nouvelle_partie(Plateau *plateau);
 
 
-void bushi_joueur(Plateau *plateau, int joueur);
+void affiche_bis(Plateau *plateau);
+
+
+Bushi* bushi_joueur(Plateau *plateau, int joueur);
 void deplacement_bushi(Plateau *plateau,Bushi *bushi);
-void deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi* moove[]);
+int deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi moove[]);
 int est_valide(Plateau *plateau,Bushi bushi, int x, int y);
+
+void empty_buffer();
 #endif
