@@ -15,7 +15,16 @@ void affiche_bushi(Bushi b){
 }
 
 void affiche_bushi_coord(Bushi *b){
-	printf("Type %d : (%c,%d)	",b->type,b->abs + 'A',b->ord);
-	//printf("Type de deplacment : %d ",b->jouable);
+ 
+    char *type;
+ 
+    switch(b->type)
+    {
+        case 1 : type = "SNG"; break;
+        case 2 : type = "LIO"; break;
+        case 3 : type = "DRA"; break;
+        default : break;
+    }
+    printf("[%s] (%c,%d)    ",type,b->abs + 'A',b->ord);
+    //printf("Type de deplacment : %d ",b->jouable);
 }
-
