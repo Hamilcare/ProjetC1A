@@ -16,12 +16,6 @@ struct Bushi {
 
 
 
-
-
-
-
-
-
 void affiche_bushi(Bushi b);
 void affiche_bushi_coord(Bushi *b);
 

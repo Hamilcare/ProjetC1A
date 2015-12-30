@@ -44,7 +44,7 @@ void affiche_plateau(Plateau *plateau)
     {
         for (k = 0; k < 2; k++)
         {
-            printf("| %0.2d |  ", i + 1);
+            printf("| %0.2d |  ", i);
             for(j = 0; j < N; j++)
             {
     //          affiche_bushi(platal.pions[i][j]);
@@ -153,7 +153,7 @@ Bushi* bushi_joueur(Plateau *plateau, int joueur)
 	
 	printf("Liste des bushis que vous pouvez jouer : %d différents \n",k);
 	for(i=0;i<k;i++){
-		printf("%d. ",i+1);
+		printf("%0.2d. ",i+1);
 		affiche_bushi_coord(tab[i]);
 		if((i+1)%6==0){
 			printf("\n");
@@ -191,7 +191,7 @@ Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi)
 	
 	
 	for(i=0; i<k; i++){
-		printf("%d. ",i+1);
+		printf("%0.2d. ",i+1);
 		affiche_bushi_coord(&(moove[i]));
 		printf("Type dep : %d\n",(moove[i].jouable));
 		if((i+1)%6==0){
@@ -199,7 +199,7 @@ Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi)
 		}
 		
 	}
-	printf("%d. Changer de Bushi\n",k+1);
+	printf("%0.2d. Changer de Bushi\n",k+1);
 	
 	
 	while(choix<=0 || choix>k+1){
@@ -229,85 +229,6 @@ void affiche_bis(Plateau *plateau){
 	}
 }
 
-/*
-//return la taille de moove
-int deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi moove[])
-{
-	
-	int i,j;
-	int k=0;//index du tableau moove
-
-	 
-	for(i=1; i>=-1; i--){
-		
-		for(j=1; j>=-1; j--){
-			
-			int tempoAbs=(bushi->abs)+j;
-			int tempoOrd=(bushi->ord)+i;
-			
-			//on verifie que la case que l'on veut tester est dans le plateau et est valide
-			if(est_valide(plateau, *bushi, i,j)==1){
-				
-				
-				//on verifie que la case est vide
-				if(plateau->pions[tempoOrd][tempoAbs].type==0){
-					moove[k]=(plateau->pions[tempoOrd][tempoAbs]);
-					k++;
-					//printf("--La case (%d,%d) est de type %d --\n",tempoAbs,tempoOrd,plateau->pions[tempoOrd][tempoAbs].type);
-					//printf("---La case (%d,%d) est ajoutee aux deplacements---\n",tempoAbs,tempoOrd);
-					
-						
-					if(est_valide(plateau, *bushi, 2*i, 2*j)==1){
-						tempoAbs=tempoAbs+j;
-						tempoOrd=tempoOrd+i;
-					
-						//Si la case située à 2 de distance est libre on l'ajoute au déplacment possible
-						if(plateau->pions[tempoOrd][tempoAbs].type==0){
-							//printf("YOLO\n");
-							moove[k]=(plateau->pions[tempoOrd][tempoAbs]);
-							//affiche_bushi(plateau->pions[tempoOrd][tempoAbs]);
-							k++;
-							//printf("--La case (%d,%d) est de type %d --\n",tempoAbs,tempoOrd,plateau->pions[tempoOrd][tempoAbs].type);
-							//printf("---La case (%d,%d) est ajoutee aux deplacements---\n",tempoAbs,tempoOrd);
-						}
-					}
-
-				}
-				
-				else if (plateau->pions[tempoOrd][tempoAbs].type==1){
-					
-					if(est_valide(plateau, *bushi, 2*i, 2*j)==1){
-						tempoAbs=tempoAbs+j;
-						tempoOrd=tempoOrd+i;
-					
-						//Si la case située à 2 de distance est libre on l'ajoute au déplacment possible
-						if(plateau->pions[tempoOrd][tempoAbs].type==0){
-							//printf("YOLO\n");
-							moove[k]=(plateau->pions[tempoOrd][tempoAbs]);
-							affiche_bushi(plateau->pions[tempoOrd][tempoAbs]);
-							k++;
-							//printf("--La case (%d,%d) est de type %d --\n",tempoAbs,tempoOrd,plateau->pions[tempoOrd][tempoAbs].type);
-							//printf("---La case (%d,%d) est ajoutee aux deplacements---\n",tempoAbs,tempoOrd);
-						}
-					}
-					
-					
-				}
-					
-				
-			}
-		}
-	}
-	
-	for(i=0; i<k; i++){
-		printf("%d. ",i+1);
-		affiche_bushi(moove[i]);
-		
-	}
-	
-	return k;			
-	
-}*/
 
 
 int deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi moove[])
@@ -390,6 +311,8 @@ int deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi moove[])
 }	
 
 
+//int deplacement_lion(Plateau *plateau,Bushi *bushi, 
+
 
 
 //Renvoie le type de la case
@@ -410,35 +333,135 @@ int est_valide(Plateau *plateau,Bushi bushi, int x, int y)
 
 
 //En debut de tour, remet tout les bushi du joueur à jouable
-void resetJouable(Plateau *plateau,int joueur){
+
+void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception){
 	int i,j;
-	for(i=0;i<N;i++){
-		for(j=0;j<N;j++){
-			if(plateau->pions[i][j].joueur==joueur){
-				plateau->pions[i][j].jouable=1;
+	//printf("Valeur : %d ",valeur);
+	switch(valeur){
+		case 1:
+			for(i=0;i<N;i++){
+				for(j=0;j<N;j++){
+					if(plateau->pions[i][j].joueur==joueur){
+						if(&plateau->pions[i][j]==exception){
+							plateau->pions[i][j].jouable=0;
+							printf("Exception detectée");
+							}
+						else{
+							plateau->pions[i][j].jouable=valeur;
+						}
+					}
+				}
 			}
-		}
+			break;
+		
+		case 0:
+			for(i=0;i<N;i++){
+				for(j=0;j<N;j++){
+					if(plateau->pions[i][j].joueur==joueur){
+						if(&plateau->pions[i][j]==exception){
+							plateau->pions[i][j].jouable=1;
+							printf("Exception detectée");
+							}
+						else{
+							plateau->pions[i][j].jouable=valeur;
+						}
+					}
+				}
+			}
+			break;
 	}
 }
-
 //L'attribut jouable de bushiDestination indique si le bushi saute pendant son délacement.
 void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestination){
-	printf("\nDestination in effectuer_deplacement\n");
-	affiche_bushi(bushiDestination);
-	
-	switch(bushiDestination.jouable){
+	/*printf("\nDestination in effectuer_deplacement\n");
+	affiche_bushi(bushiDestination);*/
+		
+		int tmpAbs=bushiBouge->abs;
+		int tmpOrd=bushiBouge->ord;
+		
+		switch(bushiDestination.jouable){
+			
+			
+			case 1 :
+				bushiBouge->abs=bushiDestination.abs;
+				bushiBouge->ord=bushiDestination.ord;
+				/*printf("Adresse du bushi deplace dans effectuer_deplacement : %p \n",bushiBouge);
+				affiche_bushi_coord(bushiBouge);
+				affiche_bushi(*bushiBouge);*/
+				
+				printf("\n");
+				plateau->pions[bushiBouge->ord][bushiBouge->abs]=*bushiBouge;
+				affiche_bushi(plateau->pions[bushiBouge->ord][bushiBouge->abs]);
+				plateau->pions[tmpOrd][tmpAbs]=EMPTY(tmpAbs,tmpOrd);
+			
+			resetJouable(plateau,bushiBouge->joueur,0,bushiBouge);
 		
 		case 0 : 
 			
+			
 			bushiBouge->abs=bushiDestination.abs;
 			bushiBouge->ord=bushiDestination.ord;
-			//affiche_bushi_coord(bushiBouge);
-			printf("Adresse du bushi deplace dans effectuer_deplacement : %p \n",bushiBouge);
+			/*printf("Adresse du bushi deplace dans effectuer_deplacement : %p \n",bushiBouge);
 			affiche_bushi_coord(bushiBouge);
+			affiche_bushi(*bushiBouge);*/
+			
+			printf("\n");
+			plateau->pions[bushiBouge->ord][bushiBouge->abs]=*bushiBouge;
+			affiche_bushi(plateau->pions[bushiBouge->ord][bushiBouge->abs]);
+			plateau->pions[tmpOrd][tmpAbs]=EMPTY(tmpAbs,tmpOrd);
+			
+			
+			//affiche_bushi_coord(bushiBouge);
+			//printf("Adresse du bushi deplace dans effectuer_deplacement : %p \n",bushiBouge);
+			//affiche_bushi_coord(bushiBouge);
 			
 			break;
+			
+		case -1 :
+			printf("coord depart : ");
+			affiche_bushi_coord(bushiBouge);
+			printf("\ncoord arrive : ");
+			affiche_bushi_coord(&bushiDestination);
+			
+			
+			int absEnnemi=(tmpAbs+bushiDestination.abs)/2;
+			printf("abs Ennemi : %d\n",absEnnemi);
+			int ordEnnemi=(tmpOrd+bushiDestination.ord)/2;
+			printf("ord Ennemi : %d\n",ordEnnemi);
+			printf("bushiBouge1\n");
+			affiche_bushi(*bushiBouge);
+			
+			bushiBouge->abs=bushiDestination.abs;
+			bushiBouge->ord=bushiDestination.ord;
+			printf("bushiBouge2\n");
+			affiche_bushi(*bushiBouge);
+			
+			plateau->pions[bushiBouge->ord][bushiBouge->abs]=*bushiBouge;
+			printf("bushiBouge3\n");
+			affiche_bushi(*bushiBouge);
+			
+			plateau->pions[tmpOrd][tmpAbs]=EMPTY(tmpAbs,tmpOrd);
+			printf("bushiBouge4\n");
+			affiche_bushi(*bushiBouge);
+			
+			plateau->pions[ordEnnemi][absEnnemi]=EMPTY(absEnnemi,ordEnnemi);
+			printf("bushiBouge5	\n");
+			
+			affiche_bushi(*bushiBouge);
+			
+			
+			//On a sauté un ennemi, on ne peut donc plus jouer ce Bushi durant ce tour.
+			printf("--Test saut ennemi--");
+			affiche_bushi(plateau->pions[bushiBouge->ord][bushiBouge->abs]);
+			printf("bushiBouge\n");
+			affiche_bushi(*bushiBouge);
+			plateau->pions[bushiBouge->ord][bushiBouge->abs].jouable=0;
+			
+			break;
+			
 		default : 
 			printf("Unexpected error in effectuer_deplacement\n");
+			break;
 		}
 	
 	
@@ -447,21 +470,28 @@ void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestina
 
 void tour_joueur(Plateau *plateau,int joueur){
 	Bushi bushiDestination;
-	resetJouable(plateau,joueur);
+	resetJouable(plateau,joueur,1,&EMPTY(-1,-1));
 	Bushi* bushiBouge=NULL;
 	
-	do{
-	affiche_plateau(plateau);
-	bushiBouge=bushi_joueur(plateau, joueur);
-	printf("Adresse du bushi deplace dans tour_joueur : %p \n",bushiBouge);
-	affiche_plateau(plateau);
-	bushiDestination=deplacement_bushi(plateau,bushiBouge);
-	printf("Destination in tour_jouer\n");
-	affiche_bushi(bushiDestination);
-	}while(bushiDestination.abs==0 && bushiDestination.ord==0);//Permet de changer d'avis concernant le Bushi que l'on souhaite déplacer
 	
-	effectuer_deplacement(plateau,bushiBouge,bushiDestination);
-	affiche_plateau(plateau);
+	do{
+		do{
+		affiche_plateau(plateau);
+		bushiBouge=bushi_joueur(plateau, joueur);
+		affiche_plateau(plateau);
+		bushiDestination=deplacement_bushi(plateau,bushiBouge);
+	
+		}while(bushiDestination.abs==0 && bushiDestination.ord==0);//Permet de changer d'avis concernant le Bushi que l'on souhaite déplacer
+	
+		effectuer_deplacement(plateau,bushiBouge,bushiDestination);
+		affiche_plateau(plateau);
+		
+		
+		
+	}while(bushiDestination.jouable!=0); // Tant qu'on saute on continue à jouer
+	
+	
+	
 	
 	
 }

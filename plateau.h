@@ -23,7 +23,7 @@ Bushi* bushi_joueur(Plateau *plateau, int joueur);
 Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi);
 int deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi moove[]);
 int est_valide(Plateau *plateau,Bushi bushi, int x, int y);
-void resetJouable(Plateau *plateau,int joueur);
+void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception);
 
 void tour_joueur(Plateau *plateau,int joueur);
 
