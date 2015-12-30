@@ -194,7 +194,7 @@ Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi)
 	switch(bushi->type){
 		case 1 : k=deplacement_singe(plateau, bushi, move);break;
 		case 2 : k=deplacement_lion(plateau, bushi, move);break;
-		case 3 : k=deplacement_dragon(plateau, bushi, move);break;
+		case 3 : k=deplacement_dragon(plateau, bushi, move);printf("lel\n");break;
 		default : break;
 	}
 	
@@ -410,14 +410,14 @@ int deplacement_dragon(Plateau *plateau,Bushi *bushi, Bushi move[]){
 					tempoAbs=(bushi->abs)+2*j;
 					tempoOrd=(bushi->ord)+2*i;
 					move[k]=(plateau->pions[tempoOrd][tempoAbs]);
-					//affiche_bushi(move[k]);
+					affiche_bushi(move[k]);
 					move[k].jouable=aSaute;
 					k++;
 				}
 			}
 		}
 	}
-	
+	printf("lol\n");
 	return k;
 }
 
