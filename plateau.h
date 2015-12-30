@@ -20,9 +20,12 @@ void affiche_bis(Plateau *plateau);
 
 
 Bushi* bushi_joueur(Plateau *plateau, int joueur);
-void deplacement_bushi(Plateau *plateau,Bushi *bushi);
+Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi);
 int deplacement_singe(Plateau *plateau,Bushi *bushi, Bushi moove[]);
 int est_valide(Plateau *plateau,Bushi bushi, int x, int y);
+void resetJouable(Plateau *plateau,int joueur);
+
+void tour_joueur(Plateau *plateau,int joueur);
 
 void empty_buffer();
 #endif

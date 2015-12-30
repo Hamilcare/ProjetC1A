@@ -7,7 +7,7 @@ void affiche_bushi(Bushi b){
 
 	printf("type : %d\n",b.type);
 	printf("joueur : %d\n",b.joueur);
-	printf("alive : %d\n",b.alive);
+	printf("jouable : %d\n",b.jouable);
 	printf("abcisse : %d\n",b.abs);
 	printf("ordonnee : %d\n",b.ord);
 	
@@ -15,7 +15,8 @@ void affiche_bushi(Bushi b){
 }
 
 void affiche_bushi_coord(Bushi *b){
-	printf("Type %d : (%d,%d)\n",b->type,b->abs,b->ord);
+	printf("Type %d : (%d,%d)	",b->type,b->abs,b->ord);
+	//printf("Type de deplacment : %d ",b->jouable);
 }
 
 

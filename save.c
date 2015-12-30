@@ -48,10 +48,10 @@ void            handle_signal(int signal)
                 do {
                 answer = getchar();
 				} while (answer != 'y' && answer != 'n');
-				if (answer='y'){
+				if (answer=='y'){
 					(void)signal;
 				}
-				if(answer='n'){
+				if(answer=='n'){
 					exit(0);
 				}
 			}
@@ -61,10 +61,10 @@ void            handle_signal(int signal)
                 do {
                 answer = getchar();
 				} while (answer != 'y' && answer != 'n');
-				if (answer='y'){
+				if (answer=='y'){
 					(void)signal;
 				}
-				if (answer='n'){
+				if (answer=='n'){
 					exit(0);
 				}
 			}

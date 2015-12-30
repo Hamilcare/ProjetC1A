@@ -11,7 +11,7 @@ int main (void){
 	signal(SIGINT, &handle_signal);
 
 	FILE *fichier = NULL;
-	fichier = fopen("save.starfoullah",  "r");
+	fichier = fopen("save.shingshang",  "r");
  
 	if (fichier)
 	{
@@ -23,17 +23,18 @@ int main (void){
 		init_plateaubis(&plateau);
 	}
 	//fclose(fichier);	
-	affiche_plateau(&plateau);  
-       	getchar();
+	//affiche_plateau(&plateau);  
+    //   	getchar();
 	nouvelle_partie(&plateau);
 	
-	
+	/*
 	affiche_plateau(&plateau);  
 	Bushi* b = bushi_joueur(&plateau, 1);
-	affiche_bis(&plateau);
+	//affiche_bis(&plateau);
 	deplacement_bushi(&plateau,b);   
-    affiche_bis(&plateau);
-       
+    //affiche_bis(&plateau);
+    */
+    tour_joueur(&plateau, 1);  
        
        
         return 0;
