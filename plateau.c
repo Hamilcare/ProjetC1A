@@ -30,48 +30,50 @@ void init_plateaubis(Plateau *plateau)
 
 
 
-
 void affiche_plateau(Plateau *plateau)
 {
-	int i,j,k;
-	char *color;
-	
-	puts("      ----------------------------------------      ");
-	for (i = 0; i < N; i++)
-	{
-		for (k = 0; k < 2; k++)
-		{ 
-			for(j = 0; j < N; j++)
-			{
-	//			affiche_bushi(platal.pions[i][j]);
-				if (j == 0 && plateau->pions[i][j].type != -1)
-					printf("|");	
-				color = ((plateau->pions[i][j].joueur == 1) ? RED : BLUE);
-				setcolor(color);	
-				switch(plateau->pions[i][j].type)
-				{
-					case -2 : printf(" PP "); break;
-					case -1 : printf("     "); break;
-					case 0 : printf("    "); break;
-					case 1 : printf(" SS "); break;
-					case 2 : printf(" LL "); break;
-					case 3 : printf(" DD "); break;
-					default : break;
-				}
-				setcolor(WHITE);
-				if (!(j == N - 1 && plateau->pions[i][j].type == -1))
-					printf("|");	
-			}
-			printf("\n");
-		}
-		if (i >= 3 && i <= 5)
-			puts("----------------------------------------------------");
-		else
-			puts("      ----------------------------------------      ");		
-	}
+    int i,j,k;
+    char *color;
+ 
+    puts("        ---------------------------------------------------      ");
+    puts("        | AA | BB | CC | DD | EE | FF | GG | HH | II | JJ |      ");
+    puts("        | AA | BB | CC | DD | EE | FF | GG | HH | II | JJ |      ");
+    puts("        ---------------------------------------------------      ");
+    puts("------       -----------------------------------------           ");
+    for (i = 0; i < N; i++)
+    {
+        for (k = 0; k < 2; k++)
+        {
+            printf("| %0.2d |  ", i + 1);
+            for(j = 0; j < N; j++)
+            {
+    //          affiche_bushi(platal.pions[i][j]);
+                if (j == 0 && plateau->pions[i][j].type != -1)
+                    printf("|");
+                color = ((plateau->pions[i][j].joueur == 1) ? RED : BLUE);
+                setcolor(color);
+                switch(plateau->pions[i][j].type)
+                {
+                    case -2 : printf(" PP "); break;
+                    case -1 : printf("     "); break;
+                    case 0 : printf("    "); break;
+                    case 1 : printf(" SS "); break;
+                    case 2 : printf(" LL "); break;
+                    case 3 : printf(" DD "); break;
+                    default : break;
+                }
+                setcolor(WHITE);
+                if (!(j == N - 1 && plateau->pions[i][j].type == -1))
+                    printf("|");
+            }
+            printf("\n");
+        }
+        if (i >= 3 && i <= 5)
+            puts("------  ---------------------------------------------------");
+        else
+            puts("------       -----------------------------------------      ");
+    }
 }
-
-
 
 
 
@@ -427,6 +429,7 @@ void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestina
 	switch(bushiDestination.jouable){
 		
 		case 0 : 
+			
 			bushiBouge->abs=bushiDestination.abs;
 			bushiBouge->ord=bushiDestination.ord;
 			//affiche_bushi_coord(bushiBouge);
