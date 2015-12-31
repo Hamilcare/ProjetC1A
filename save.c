@@ -46,8 +46,8 @@ void            handle_signal(int signal)
                 
                 printf("Voulez vous continuer la partie ? [y : n]");
                 do {
-                answer = getchar();
-				} while (answer != 'y' && answer != 'n');
+					answer = getchar();
+				}while (answer != 'y' && answer != 'n');
 				if (answer=='y'){
 					(void)signal;
 				}
@@ -59,8 +59,8 @@ void            handle_signal(int signal)
 			if (answer == 'n'){
 				printf("Voulez vous continuer la partie ? [y : n]");
                 do {
-                answer = getchar();
-				} while (answer != 'y' && answer != 'n');
+					answer = getchar();
+				}while (answer != 'y' && answer != 'n');
 				if (answer=='y'){
 					(void)signal;
 				}

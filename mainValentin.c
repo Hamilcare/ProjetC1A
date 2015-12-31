@@ -7,12 +7,13 @@ void handle_signal(int signal);
 void load();
 
 int main (void){
-
+	srand(time(NULL));
+	int test,i,j;
 	signal(SIGINT, &handle_signal);
 
 	FILE *fichier = NULL;
 	fichier = fopen("save.shingshang",  "r");
- 
+	
 	if (fichier)
 	{
 		puts("starfoullah ya une sauvegarde de mort");
@@ -21,20 +22,34 @@ int main (void){
 	else
 	{
 		init_plateaubis(&plateau);
-	}
-	//fclose(fichier);	
-	//affiche_plateau(&plateau);  
-    //   	getchar();
-	nouvelle_partie(&plateau);
+		for (i = 0; i < N; i++)
+		{
+			for(j = 0; j < N; j++)
+			{
+				affiche_bushi_coord(&(plateau.pions[i][j]));
+			}
+		}
+		getchar();
 	
-	/*
-	affiche_plateau(&plateau);  
-	Bushi* b = bushi_joueur(&plateau, 1);
-	//affiche_bis(&plateau);
-	deplacement_bushi(&plateau,b);   
-    //affiche_bis(&plateau);
-    */
-    tour_joueur(&plateau, 1);  
+		nouvelle_partie(&plateau);
+		for (i = 0; i < N; i++)
+		{
+			for(j = 0; j < N; j++)
+			{
+				affiche_bushi_coord(&(plateau.pions[i][j]));
+			}
+		}
+		getchar();
+	}
+	
+	
+	
+	//save();
+	
+	
+    //do{
+    test=tour_joueur(&plateau, 1);
+    //}while(1);
        
        
         return 0;

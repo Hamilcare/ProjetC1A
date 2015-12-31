@@ -6,6 +6,7 @@
 typedef struct Plateau Plateau;
 struct Plateau{
 	Bushi pions [N][N];
+	int quiJoue;
 };
 
 extern Plateau plateau;
@@ -29,7 +30,7 @@ int deplacement_dragon(Plateau *plateau,Bushi *bushi, Bushi moove[]);
 
 void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception);
 
-void tour_joueur(Plateau *plateau,int joueur);
+int tour_joueur(Plateau *plateau,int joueur);
 
 void empty_buffer();
 #endif
