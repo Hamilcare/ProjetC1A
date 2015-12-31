@@ -11,11 +11,14 @@ void empty_buffer()
     }
 }
 
+//Initialise le plateau en plaçant toutes les cases à BLOCKED ou EMPTY
+//Plus rapide que la v1
 void init_plateaubis(Plateau *plateau)
 {
 	int commence;
 	int i, j;
-
+	
+	//On gère les cas où on est sur que la case est EMPTY
 	for (i = 0; i < N; i++)
 	{
 		for(j = 1; j < N - 1; j++)
@@ -23,21 +26,24 @@ void init_plateaubis(Plateau *plateau)
 			plateau->pions[i][j] = EMPTY(i,j);
 		}	
 	}
+	
+	//On gère les colonnes où des cases EMPTY et BLOCKED cohabitent
 	for (i = 0; i < N; i++)
 	{
 		plateau->pions[i][0]  = ((i == 4 || i == 5) ? EMPTY(i,0) : BLOCKED(i,0));
 		plateau->pions[i][N - 1] = ((i == 4 || i == 5) ? EMPTY(i,N-1) : BLOCKED(i,N-1));
 	}
 	
+	//On détermine ici de manière aléatoire le joueur qui va jouer en premier
 	commence = (rand() % (100 - 0 + 1));
 	plateau->quiJoue=commence%2;
-	//plateau->quiJoue=0;
-	printf("Le joueur qui va commencer : %d\n",plateau->quiJoue);
 	
 }
 
 
 
+//Affichage du plateau 
+//Gestion de la couleur des pions
 void affiche_plateau(Plateau *plateau)
 {
     int i,j,k;
@@ -52,6 +58,7 @@ void affiche_plateau(Plateau *plateau)
     {
         for (k = 0; k < 2; k++)
         {
+			//On formate l'affichage afin de gérer l'alignement
             printf("| %0.2d |  ", i);
             for(j = 0; j < N; j++)
             {
@@ -83,6 +90,8 @@ void affiche_plateau(Plateau *plateau)
     }
 }
 
+//Même principe que affiche plateau (dommage qu'il n'y ai pas de surcharge en c)
+//On affiche en vert le Bushi que l'on souhaite déplacer ainsi que les cases qui'il peut atteindre
 void affiche_plateau_deplacement(Plateau *plateau,Bushi* bushiBouge, Bushi* tab,int taille)
 {
     int i,j,k;
@@ -276,6 +285,7 @@ Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi)
 		}
 		
 	}
+	printf("\n");
 	printf("%0.2d. Changer de Bushi ",0);
 	printf("-1. Passer votre tour\n",-1);
 	
@@ -295,8 +305,8 @@ Bushi deplacement_bushi(Plateau *plateau,Bushi *bushi)
 	}
 	
 	else{
-		printf("Destination in deplacement_bushi\n");
-		affiche_bushi(move[choix-1]);
+		//printf("Destination in deplacement_bushi\n");
+		//affiche_bushi(move[choix-1]);
 		return move[choix-1];
 	}
 		
@@ -530,7 +540,6 @@ void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception){
 					if(plateau->pions[i][j].joueur==joueur){
 						if(&plateau->pions[i][j]==exception){
 							plateau->pions[i][j].jouable=0;
-							printf("Exception detectée");
 							}
 						else{
 							plateau->pions[i][j].jouable=valeur;
@@ -546,7 +555,6 @@ void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception){
 					if(plateau->pions[i][j].joueur==joueur){
 						if(&plateau->pions[i][j]==exception){
 							plateau->pions[i][j].jouable=1;
-							printf("Exception detectée");
 							}
 						else{
 							plateau->pions[i][j].jouable=valeur;
@@ -560,14 +568,14 @@ void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception){
 //L'attribut jouable de bushiDestination indique si le bushi saute pendant son délacement.
 void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestination){
 		
-		printf("Debut effectuer déplacement \n");
+		
 		
 		
 		int tmpAbs=bushiBouge->abs;
 		int tmpOrd=bushiBouge->ord;
 		int absEnnemi;
 		int ordEnnemi;
-		printf("Coord tmp (%d,%d)\n",tmpAbs,tmpOrd);
+		
 		
 		switch(bushiDestination.jouable){
 			
@@ -649,6 +657,29 @@ void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestina
 //Renvoie 0 si tout c'est bien passé
 //Renvoie 1 si le joueur a passé son tour/n'a pas pu jouer
 void tour_joueur(Plateau *plateau,int joueur){	
+	
+	if(joueur==1){
+		
+		puts("	          _                               __      ");
+		puts("	         | |                             /_ |		");
+		puts("	         | | ___  _   _  ___ _   _ _ __   | |		");
+		puts("	     _   | |/ _ \\| | | |/ _ \\ | | | '__|  | |	");
+		puts("	    | |__| | (_) | |_| |  __/ |_| | |     | |		");
+		puts("	     \\____/ \\___/ \\__,_|\\___|\\__,_|_|     |_|");
+	}
+	
+	else{
+		puts("	          _                               ___  ");
+		puts("	         | |                             |__ \\ ");
+		puts("	         | | ___  _   _  ___ _   _ _ __     ) |");
+		puts("	     _   | |/ _ \\| | | |/ _ \\ | | | '__|   / / ");
+		puts("	    | |__| | (_) | |_| |  __/ |_| | |     / /_ ");
+		puts("	     \\____/ \\___/ \\__,_|\\___|\\__,_|_|    |____|");
+		puts("	                                               ");
+	}
+                                              
+ 
+
 	
 	Bushi bushiDestination;
 	
@@ -738,6 +769,7 @@ int a_perdu(Plateau* plateau){
 		printf("Le joueur %d a perdu car un de ses portails a été capturé\n-----GAME OVER-----\n",joueur);
 		resul=1;
 	}
+	
 	return resul;
 }
 	
