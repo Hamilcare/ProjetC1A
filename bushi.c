@@ -28,8 +28,8 @@ void affiche_bushi_coord(Bushi *b){
         case -1 : type = "BLO";break;
         default : type="BIDE";break;
     }
-    printf("[%s]%d(%c,%d)    ",type,b->joueur,b->abs + 'A',b->ord);
-    //printf("Type de deplacment : %d ",b->jouable);
+    printf("[%s] (%c,%d)    ",type,b->abs + 'A',b->ord);
+   
 }
 
 

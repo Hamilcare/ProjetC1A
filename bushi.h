@@ -18,6 +18,7 @@ struct Bushi {
 
 void affiche_bushi(Bushi b);
 void affiche_bushi_coord(Bushi *b);
+int est_dans(Bushi bushi, Bushi* tab, int k);
 
 //void charger_partie(const char* fileName, Bushi pions[N]);
 

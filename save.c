@@ -29,7 +29,7 @@ void            load( void )
         }
         fread(&plateau , sizeof(plateau) , 1 , file);
         fclose(file);
-        unlink(SAVE_FILE);
+        //unlink(SAVE_FILE);
 }
  
 void            handle_signal(int signal)
