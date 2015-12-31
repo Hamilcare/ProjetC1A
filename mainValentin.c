@@ -8,49 +8,46 @@ void load();
 
 int main (void){
 	srand(time(NULL));
-	int test,i,j;
+	int i,j;
+	char answer;
 	signal(SIGINT, &handle_signal);
 
 	FILE *fichier = NULL;
 	fichier = fopen("save.shingshang",  "r");
 	
-	if (fichier)
-	{
-		puts("starfoullah ya une sauvegarde de mort");
-		load();
+	if (fichier){
+		do{
+		puts("Une sauvegarde a ete detectee, souhaitez vous la charger? [y : n]");
+		answer=getchar();	
+		}while (answer != 'y' && answer != 'n');
+		
+		if(answer=='y'){
+		
+			puts("Chargement de la partie\n");
+			load();
+		}
+		else{
+			init_plateaubis(&plateau);
+			nouvelle_partie(&plateau);
+		}
+			
 	}
 	else
 	{
+		puts("Pas de sauvegarde detectee, lancement d'une nouvelle partie");
 		init_plateaubis(&plateau);
-		for (i = 0; i < N; i++)
-		{
-			for(j = 0; j < N; j++)
-			{
-				affiche_bushi_coord(&(plateau.pions[i][j]));
-			}
-		}
-		getchar();
+		
 	
 		nouvelle_partie(&plateau);
-		for (i = 0; i < N; i++)
-		{
-			for(j = 0; j < N; j++)
-			{
-				affiche_bushi_coord(&(plateau.pions[i][j]));
-			}
-		}
-		getchar();
+		
 	}
 	
 	
 	
-	//save();
+    do{
+    tour_joueur(&plateau, plateau.quiJoue%2+1);
+    }while(a_perdu(&plateau)==0);
 	
-	
-    //do{
-    test=tour_joueur(&plateau, 1);
-    //}while(1);
-       
        
         return 0;
 }

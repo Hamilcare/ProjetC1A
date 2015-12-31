@@ -14,6 +14,7 @@ extern Plateau plateau;
 void init_plateau(Plateau *plateau);
 void init_plateaubis(Plateau *plateau);
 void affiche_plateau(Plateau *plateau);
+void affiche_plateau_deplacement(Plateau *plateau,Bushi* bushiBouge,Bushi* tab,int k);
 void nouvelle_partie(Plateau *plateau);
 
 
@@ -30,7 +31,7 @@ int deplacement_dragon(Plateau *plateau,Bushi *bushi, Bushi moove[]);
 
 void resetJouable(Plateau *plateau,int joueur,int valeur, Bushi* exception);
 
-int tour_joueur(Plateau *plateau,int joueur);
+void tour_joueur(Plateau *plateau,int joueur);
 
 void empty_buffer();
 #endif
