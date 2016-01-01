@@ -32,15 +32,25 @@ void affiche_bushi_coord(Bushi *b){
    
 }
 
-
+/*
+ * Bushi bushi -> le bushi qu'on cherche dans tab
+ * Bushi* tab -> Le tableau dans lequel on cherce
+ * int k-> Le nombre d'éléments dans tab
+ * 
+ * Return la position du Bushi dans le tableau si il est présent
+ * Return -1 si il est absent*/ 
 int est_dans(Bushi bushi, Bushi* tab, int k){
-	int resul=0;
+	//printf("coucou\n");
+	int resul=-1;
 	int compteur=0;
-	while(compteur < k && resul==0){
+	while(compteur < k && resul==-1){
 		if(bushi.abs == tab[compteur].abs && bushi.ord==tab[compteur].ord){
-			resul=1;
+			resul=compteur;
 		}
 		compteur++;
+	}
+	if(resul !=-1){
+		//printf("%d\n",resul);
 	}
 	return resul;
 }

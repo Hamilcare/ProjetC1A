@@ -7,6 +7,8 @@
 
 Plateau plateau;
  
+ 
+//On sauvegarde l'état du plateau dans le fichier binaire SAVE_FILE à l'aide de fwrite
 void            save( void )
 {
         FILE  *file;
@@ -19,6 +21,7 @@ void            save( void )
         fclose(file);
 }
  
+//On charge l'état du plateau depuis un fichier binaire à l'aide de fread
 void            load( void )
 {
         FILE  *file;
@@ -32,7 +35,12 @@ void            load( void )
         //unlink(SAVE_FILE);
 }
  
-void            handle_signal(int signal)
+ /*
+  * Cette fonction est appele quand l'utilisateur fait ctrl+c
+  * On peut alors sauvegarder la partie puis quitter ou non le jeu
+  */
+ 
+void            save_and_quit(int signal)
 {
         char answer;
  

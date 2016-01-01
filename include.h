@@ -5,5 +5,8 @@
 	#include <time.h>
 	#define N 10
 	#define NBMAXBUSHIS 12
-	#define DEPLACEMENTSMAX 16
+	#define DEPLACEMENTSMAX 24
+	
+void save_and_quit(int signal);
+void load();
 #endif

@@ -10,7 +10,7 @@
 #define RED	"31"
 #define BLUE	"34"
 #define GREEN "32"
-#define BACKGROUNDGREEN "42"
+#define YELLOW "33"
 /* param devant être un const char *, vide (identique à "0") ou formé
 d'une où plusieurs valeurs séparées par des ; parmi
 0 réinitialisation 1 haute intensité (des caractères)
