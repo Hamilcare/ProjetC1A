@@ -44,7 +44,7 @@ void            save_and_quit(int signal)
 {
         char answer;
  
-        puts("Une partie est en cours d'execution\nSauvergarder ? [y : n]");
+        puts("Une partie est en cours d'execution\nSauvegarder ? [y : n]");
         do {
                 answer = getchar();
         } while (answer != 'y' && answer != 'n');
