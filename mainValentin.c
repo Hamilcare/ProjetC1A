@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <unistd.h>
 
+Plateau plateau;
 
 int main (void){
 	system("clear");

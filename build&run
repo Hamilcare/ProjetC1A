@@ -1,4 +1,0 @@
-gcc *.c
-mv a.out ShingShang
-./ShingShang
-
