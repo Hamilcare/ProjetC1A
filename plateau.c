@@ -28,6 +28,7 @@ void init_plateaubis(Plateau *plateau)
 	}
 	
 	//On gère les colonnes où des cases EMPTY et BLOCKED cohabitent
+	//a savoir les colonnes A et J
 	for (i = 0; i < N; i++)
 	{
 		plateau->pions[i][0]  = ((i == 4 || i == 5) ? EMPTY(i,0) : BLOCKED(i,0));
@@ -172,7 +173,7 @@ void affiche_plateau_deplacement(Plateau *plateau,Bushi* bushiBouge, Bushi* tab,
                     printf("|");
                     
                     numero=est_dans(plateau->pions[i][j],tab,taille);
-                    //Permet d'afficher le bushi selectionne en Jaune
+                    //Permet d'afficher le bushi selectionne et dont on affiche les déplacements en Jaune
                     if(&(plateau->pions[i][j])==bushiBouge){
 						color=YELLOW;
 					}
@@ -264,10 +265,13 @@ void nouvelle_partie(Plateau *plateau){
 		int tmp[5]; //Ce tableau contient la valeur des différents attributs d'un bushi lu depuis pions.txt
 					//Dans l'ordre type,abscisse, ordonnee, joueur, jouable
 					
+		/* On lit ligne par ligne le fichier et on stock les nombres de la ligne dans tmp*/
 		while(fscanf(fichier,"%d %d %d %d %d", &tmp[0], &tmp[1], &tmp[2], &tmp[3], &tmp[4])!=EOF){
 		
 			Bushi test;
+			/*On crée un bushi à partir de tmp donc des données contenu dans le fichier */
 			test=MAKEBUSHI(tmp[0],tmp[1], tmp[2], tmp[3], tmp[4]);
+			//On ajoute le bushi au plateau
 			plateau->pions[tmp[2]][tmp[1]]=test;
 			
 			
@@ -772,6 +776,9 @@ void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestina
 	
 }
 
+
+
+//Gère le tour du jeu du joueur courant
 int tour_joueur(Plateau *plateau){	
                 
 	int joueur=(plateau->quiJoue)%2+1;                            
@@ -788,11 +795,13 @@ int tour_joueur(Plateau *plateau){
 			affiche_plateau(plateau);
 			bushiBouge=bushi_joueur(plateau);
 			
-		
+			//le joueur a selectionne un bushi
 			if(bushiBouge!=NULL){
 			
-				//affiche_plateau_deplacement(plateau,bushiBouge);
+				
+				//Le joueur choisit une destination pour le bushi selectionne
 				bushiDestination=deplacement_bushi(plateau,bushiBouge);
+				
 				
 				
 			}
@@ -803,7 +812,10 @@ int tour_joueur(Plateau *plateau){
 				break;
 				}
 	
-		}while(bushiDestination.abs==0 && bushiDestination.ord==0);//Permet de changer d'avis concernant le Bushi que l'on souhaite déplacer
+		}//Permet de changer d'avis concernant le Bushi que l'on souhaite déplacer
+		// si le joueur souhaite changer de bushi dans deplacement_bushi, celle ci renverra 
+		//un bushi EMPTY(0,0)
+		while(bushiDestination.abs==0 && bushiDestination.ord==0);
 		
 		if(passeSonTour==0){
 			effectuer_deplacement(plateau,bushiBouge,bushiDestination);

@@ -1,5 +1,5 @@
 CC = gcc
-OPTIONS = -Wall -Werror
+OPTIONS = 
 
 # Indique les dépendances :
 ShingShang:  plateau.o mainValentin.o bushi.o save.o
@@ -8,15 +8,17 @@ ShingShang:  plateau.o mainValentin.o bushi.o save.o
 # Compile les dépendances
 
 bushi.o : include.h bushi.h bushi.c
-	$(CC) $(OPTIONS)  bushi.c
+	$(CC) -c $(OPTIONS)  bushi.c -o bushi.o
 
 plateau.o : include.h couleur.h plateau.h bushi.h bushi.o plateau.c
-	$(CC) $(OPTIONS)  plateau.c
+	$(CC) -c $(OPTIONS)  plateau.c -o plateau.o
 
 save.o : include.h save.c
+	$(CC) -c $(OPTIONS) save.c -o save.o
 
-mainValentin.o : include.h bushi.h bushi.o plateau.h couleur.h plateau.o save.o mainValentin.c 
-	$(CC) $(OPTIONS)  bushi.o plateau.o mainValentin.c
+mainValentin.o : include.h mainValentin.c
+	$(CC) -c $(OPTIONS) mainValentin.c -o mainValentin.o 
+
 
 clean : 
-	rm *.o
+	rm -f *.o ShingShang

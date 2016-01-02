@@ -1,5 +1,9 @@
 #Compilation 
-make ShingShang
+
+```
+make
+``` 
 
 #Sources
+
 Toutes les sources sont disponibles sur https://github.com/Hamilcare/ProjetC1A
