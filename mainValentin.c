@@ -19,7 +19,7 @@ puts("                     |___/                         |___/   ");
 	
 	
 	srand(time(NULL));
-	int i,j;
+	
 	char answer;
 	int gagne;
 	
@@ -27,6 +27,7 @@ puts("                     |___/                         |___/   ");
 	  * le programme executera la fonction handle_signal à la place du 
 	  * comportement par défaut d'un [ctrl + c], qui est de terminer 
 	  * le programme.
+	  * SIGINT correspond au signal envoyé par le système lors d'un [ctrl + c]
 	  */
 	signal(SIGINT, &save_and_quit); 
 
