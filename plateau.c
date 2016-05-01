@@ -761,8 +761,9 @@ void effectuer_deplacement(Plateau* plateau,Bushi* bushiBouge,Bushi bushiDestina
 			plateau->pions[tmpOrd][tmpAbs]=EMPTY(tmpOrd,tmpAbs);
 		
 			//On retire l'ennemi saute du jeu
-			plateau->pions[ordEnnemi][absEnnemi]=EMPTY(ordEnnemi,absEnnemi);
-			
+			if(bushiBouge->jouable==2){
+				plateau->pions[ordEnnemi][absEnnemi]=EMPTY(ordEnnemi,absEnnemi);
+			}
 			
 			resetJouable(plateau,bushiBouge->joueur,1);
 			bushiBouge->jouable=0;
